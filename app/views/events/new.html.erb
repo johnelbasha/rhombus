@@ -1,0 +1,13 @@
+<h1>New Event</h1>
+<p>Please fill in the form below</p>
+
+<%= simple_form_for @event do |f| %>
+  <%= f.input :title, label: 'Event Title', hint: 'The name of your event' %>
+  <%= f.input :location, label: 'Event Location', hint: 'Where is the event taking place?' %>
+  <%= f.input :confirmation_message, label: 'Confirmation Message', hint: 'Text displayed once booking has been confirmed' %>
+  <%= f.input :creation_button_text, label: 'Confirmation Button', hint: 'If you would like a button to redirect users after booking' %>
+  <%= f.input :creation_button_url, label: false %>
+  <%= f.input :email_confirmation, label: 'Notification Email', hint: 'Where booking notifications will be sent.' %>
+  <%= f.submit 'Save' %>
+
+<% end %>
