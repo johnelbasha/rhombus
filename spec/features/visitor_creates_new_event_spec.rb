@@ -1,15 +1,19 @@
 require 'rails_helper'
 
+def sign_up
+  click_link "Sign up"
+  fill_in "user[email]", with: 'johnelbasha@gmail.com'
+  fill_in "user[password]", with: '123456'
+  fill_in "user[password_confirmation]", with: '123456'
+  click_button 'Sign up'
+end
+
 RSpec.feature 'creating new event as a visitor' do
   scenario 'a visitor (not registered ) tries to create a new event' do
     visit "/"
     click_link "Create Event"
     expect(page).to have_content("You need to sign in or sign up before continuing.")
-    click_link "Sign up"
-    fill_in "user[email]", with: 'johnelbasha@gmail.com'
-    fill_in "user[password]", with: '123456'
-    fill_in "user[password_confirmation]", with: '123456'
-    click_button 'Sign up'
+    sign_up
     expect(page).to have_content("New Event")
     expect(page).to have_content("Please fill in the form below")
     expect(page).to have_content("Event Title")
@@ -39,11 +43,7 @@ RSpec.feature 'creating new event as a visitor' do
   scenario 'a user forgets a required field' do
     visit "/"
     click_link "Create Event"
-    click_link "Sign up"
-    fill_in "user[email]", with: 'johnelbasha@gmail.com'
-    fill_in "user[password]", with: '123456'
-    fill_in "user[password_confirmation]", with: '123456'
-    click_button 'Sign up'
+    sign_up
     fill_in "Event Title", with: "Painting Exhibition: Da Vinci"
     click_button "Save"
     expect(page).to have_content("Event has not been created!")
