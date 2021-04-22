@@ -1,3 +1,10 @@
 <h1>Rhombus</h1>
 
 <a href="/events/new">Create Event</a>
+
+
+<ul>
+  <% @events.each do |e| %>
+    <li>  <%= e.title %> </li>
+  <% end %>
+</ul>

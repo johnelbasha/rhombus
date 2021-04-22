@@ -31,7 +31,23 @@ RSpec.feature 'creating new event as a visitor' do
     click_button "Save"
     expect(page.current_path). to eq(root_path)
     expect(page).to have_content("Painting Exhibition: Da Vinci")
+    expect(page).to have_content("Event created")
     # this is all the code needed to create a new event: e.g. event # 710c8f
     # the next stage is set to edit the availability for the event.
   end
+
+  scenario 'a user forgets a required field' do
+    visit "/"
+    click_link "Create Event"
+    click_link "Sign up"
+    fill_in "user[email]", with: 'johnelbasha@gmail.com'
+    fill_in "user[password]", with: '123456'
+    fill_in "user[password_confirmation]", with: '123456'
+    click_button 'Sign up'
+    fill_in "Event Title", with: "Painting Exhibition: Da Vinci"
+    click_button "Save"
+    expect(page).to have_content("Event has not been created!")
+    expect(page).to have_content("Location can't be blank")
+  end
+  
 end
