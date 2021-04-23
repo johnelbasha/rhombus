@@ -5,6 +5,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    # comment
     @event.user = current_user
     @event.uid = generate_uid
     if @event.save
